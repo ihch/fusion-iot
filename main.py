@@ -15,6 +15,7 @@ def main():
     worksheet = spreadsheet.sheets.get_worksheet(0)
 
     """
+    # post ex.
     data = [
             [1, 2, 3],
             [4, 5, 6],
@@ -22,6 +23,11 @@ def main():
             ]
     for i, datum in enumerate(data):
         worksheet.append_row([i] + datum)
+
+
+    # get ex.
+    worksheet = sheets.get_worksheet(0)
+    pprint(worksheet.get_all_values())
     """
 
 
