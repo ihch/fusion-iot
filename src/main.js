@@ -16,9 +16,23 @@ function getSpreadsheet(callback) {
     spreadsheet_client.getInfo(function(err, data) {
       for (var i in data.worksheets) {
         data.worksheets[i].getRows(function(err, rows) {
-          var res = []
-          for (var j in rows) {
-            res.push(rows[j].a)
+          console.log(rows)
+          var row_name = rows[0];
+          var res = {
+            "time": [],
+            "value": new Array(row_name.length).fill(0).map(() => {
+              return new Array(1);
+            }),
+          }
+          for (var j in rows.slice(0)) {
+            res["time"].push(rows[j].time)
+
+            for (var k in row_name.slice(1)) {
+              res["value"][k].push(rows[j][row_name])
+            }
+            res["value"][0].push(rows[j].value1)
+            res["value"][1].push(rows[j].value2)
+            res["value"][2].push(rows[j].value3)
           }
           writeChart(data.worksheets, res)
         })
@@ -32,6 +46,11 @@ function writeChart(worksheets, data) {
   if (!("ChartNumber" in writeChart)) {
     writeChart.ChartNumber = 0
   }
+  console.log(data)
+  console.log(data["time"])
+  console.log(data["value"][0])
+  console.log(data["value"][1])
+  console.log(data["value"][2])
   /*
   console.log(writeChart.ChartNumber)
   console.log(worksheets[writeChart.ChartNumber])
@@ -44,19 +63,45 @@ function writeChart(worksheets, data) {
   var myChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: data,
-      datasets: [{
-        label: worksheets[writeChart.ChartNumber].title,
-        // 折れ線のカーブ
-        lineTension: 0,
-        // 塗りつぶし
-        fill: false,
-        data: data,
-        borderColor: [
-          'rgba(244, 99, 132)'
-        ],
-        borderWidth: 1
-      }]
+      labels: data["time"],
+      datasets: [
+        {
+          label: "temperature",
+          // 折れ線のカーブ
+          lineTension: 0,
+          // 塗りつぶし
+          fill: false,
+          data: data["value"][0],
+          borderColor: [
+            'rgba(244, 99, 132)'
+          ],
+          borderWidth: 1,
+        },
+        {
+          label: "heartbeat",
+          // 折れ線のカーブ
+          lineTension: 0,
+          // 塗りつぶし
+          fill: false,
+          data: data["value"][1],
+          borderColor: [
+            'rgba(179,181,198)'
+          ],
+          borderWidth: 1,
+        },
+        {
+          label: "vibration",
+          // 折れ線のカーブ
+          lineTension: 0,
+          // 塗りつぶし
+          fill: false,
+          data: data["value"][2],
+          borderColor: [
+            'rgba(54,164,235)'
+          ],
+          borderWidth: 1,
+        }
+      ]
     }
   }, options)
   writeChart.ChartNumber++
