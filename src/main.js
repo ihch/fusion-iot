@@ -73,10 +73,10 @@ function writeChart(worksheets, data) {
   var borderColors = [
     'rgba(244, 99, 132)',
     'rgba(179,181,198)',
-    'rgba(54,164,235)'
-    'rgba(217,242,77)'
-    'rgba(32,247,172)'
-    'rgba(34,188,191)'
+    'rgba(54,164,235)',
+    'rgba(217,242,77)',
+    'rgba(32,247,172)',
+    'rgba(34,188,191)',
   ]
   var ctx = document.getElementById("myChart" + String(writeChart.ChartNumber + 1))
   var options = {
