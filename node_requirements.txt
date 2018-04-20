@@ -1,3 +1,0 @@
-browserify
-node-google-spreadsheet
-chart.js
