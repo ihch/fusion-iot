@@ -1,7 +1,5 @@
 /private/*
 /__pycache__/*
-/node_modules/*
-package-lock.json
 get_sheet_data_sample1.py
 get_sheet_data_sample2.py
 post_data_to_sheet_sample.py
