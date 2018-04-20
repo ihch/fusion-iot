@@ -91,7 +91,7 @@ function writeChart(worksheets, data) {
         let res = [];
         for (var i in data.col_name.slice(1)) { // data.col_name[0]は時間データなので省く
           res.push({
-            label: data.col_name[i].slice(1),
+            label: data.col_name[i],
             // 折れ線のカーブ
             lineTension: 0,
             // 塗りつぶし
